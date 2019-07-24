@@ -7,3 +7,4 @@ mageXT contains some extensions for usage in go [magefiles](https://github.com/m
 | package | description | godoc |
 | ------- | ----------- | ----- |
 | gocmd | go commands like `get`, `install` | [godoc](https://godoc.org/github.com/pvormste/magext/gocmd) |
+| cilintcmd | commands for golangci-lint | [godoc](https://godoc.org/github.com/pvormste/magext/cilintcmd) |

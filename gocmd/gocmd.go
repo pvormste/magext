@@ -16,85 +16,49 @@ var goInstallWithOut = sh.OutCmd(mg.GoCmd(), "install")
 
 var errModuleNotSpecified = errors.New("module was not specified")
 
-// Get represents the command for `go get`
-//
-// Example:
-//     err := gocmd.Get("github.com/pvormste/magext")
-//
+// Get represents the command for `go get`.
 func Get(module string) error {
 	return execGetCmd(false, module, "")
 }
 
-// GetByVersion represents the command fot `go get` with specified version
-//
-// Example:
-//     err := gocmd.GetByVersion("github.com/pvormste/magext", "v1.0.0")
-//
+// GetByVersion represents the command fot `go get` with specified version.
 func GetByVersion(module, version string) error {
 	return execGetCmd(false, module, version)
 }
 
-// GetWithOutput represents the command for `go get` with the return of output
-//
-// Example:
-//     output, err := gocmd.GetWithOutput("github.com/pvormste/magext")
-//
+// GetWithOutput represents the command for `go get` with the return of output.
 func GetWithOutput(module string) (string, error) {
 	return execGetCmdWithOut(false, module, "")
 }
 
 // GetByVersionWithOutput represents the command fot `go get` with specified version
 // and with return of output
-//
-// Example:
-//     output, err := gocmd.GetByVersionWithOutput("github.com/pvormste/magext", "v1.0.0")
-//
 func GetByVersionWithOutput(module, version string) (string, error) {
 	return execGetCmdWithOut(false, module, version)
 }
 
-// GetU represents the command for `go get -u`
-//
-// Example:
-//     err := gocmd.GetU("github.com/pvormste/magext")
-//
+// GetU represents the command for `go get -u`.
 func GetU(module string) error {
 	return execGetCmd(true, module, "")
 }
 
-// GetUByVersion represents the command for `go get -u` with specified version
-//
-// Example:
-//     err := gocmd.GetUByVersion("github.com/pvormste/magext", "v1.0.0")
-//
+// GetUByVersion represents the command for `go get -u` with specified version.
 func GetUByVersion(module, version string) error {
 	return execGetCmd(true, module, version)
 }
 
-// GetUWithOutput represents the command for `go get -u` with output
-//
-// Example:
-//     output, err := gocmd.GetUWithOutput("github.com/pvormste/magext")
-//
+// GetUWithOutput represents the command for `go get -u` with output.
 func GetUWithOutput(module string) (string, error) {
 	return execGetCmdWithOut(true, module, "")
 }
 
 // GetUByVersionWithOutput represents the command for `go get -u` with specified version
-// and with output
-//
-// Example:
-//     output, err := gocmd.GetUByVersionWithOutput("github.com/pvormste/magext", "v1.0.0")
-//
+// and with output.
 func GetUByVersionWithOutput(module, version string) (string, error) {
 	return execGetCmdWithOut(true, module, version)
 }
 
-// Install represents the command for `go install`
-//
-// Example:
-//     gocmd.Install("github.com/pvormste/magext")
-//
+// Install represents the command for `go install`.
 func Install(module string) error {
 	if len(module) == 0 {
 		return errModuleNotSpecified
@@ -103,11 +67,7 @@ func Install(module string) error {
 	return goInstall(module)
 }
 
-// InstallWithOutput represents the command for `go install` with output
-//
-// Example:
-//     output, err := gocmd.InstallWithOutput("github.com/pvormste/magext")
-//
+// InstallWithOutput represents the command for `go install` with output.
 func InstallWithOutput(module string) (string, error) {
 	if len(module) == 0 {
 		return "", errModuleNotSpecified

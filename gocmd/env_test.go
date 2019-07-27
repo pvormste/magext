@@ -45,7 +45,7 @@ func TestSetCustomGoBin(t *testing.T) {
 		tt.Expect(actualErr).To(test.expectedErr)
 
 		actualGoBin := os.Getenv(EnvNameGoBin)
-		unixStyleGoBin := strings.ReplaceAll(actualGoBin, "\\", "/") // Make this test work on windows
+		unixStyleGoBin := strings.Replace(actualGoBin, "\\", "/", -1) // Make this test work on windows
 		tt.Expect(unixStyleGoBin).To(test.expectedGoBin)
 	})
 
@@ -62,7 +62,7 @@ func TestSetCustomGoBin(t *testing.T) {
 		tt.Expect(actualErr).To(test.expectedErr)
 
 		actualGoBin := os.Getenv(EnvNameGoBin)
-		unixStyleGoBin := strings.ReplaceAll(actualGoBin, "\\", "/") // Make this test work on windows
+		unixStyleGoBin := strings.Replace(actualGoBin, "\\", "/", -1) // Make this test work on windows
 		tt.Expect(unixStyleGoBin).To(test.expectedGoBin)
 	})
 }
@@ -78,7 +78,7 @@ func TestResetGoBin(t *testing.T) {
 		tt.Expect(actualErr).To(Not(HaveOccurred()))
 
 		actualGoBin := os.Getenv(EnvNameGoBin)
-		unixStyleGoBin := strings.ReplaceAll(actualGoBin, "\\", "/") // Make this test work on windows
+		unixStyleGoBin := strings.Replace(actualGoBin, "\\", "/", -1) // Make this test work on windows
 		tt.Expect(unixStyleGoBin).To(Equal("/temp/another-go/bin"))
 	})
 }

@@ -16,6 +16,11 @@ var additionalVariableNames = []string{
 
 var errEmptyName = errors.New("cannot set an a variable to a value when the name is empty")
 
+// AppliedEnvVariables returns a slice with all applied env variables.
+func AppliedEnvVariables() []Variable {
+	return appliedVariables
+}
+
 // ApplyEnvVariable sets the provided variable to its value. It will return an error when the name is empty.
 func ApplyEnvVariable(variable Variable) error {
 	if len(variable.Name) == 0 {
@@ -51,6 +56,13 @@ func PrintVariables(multipleVariables []Variable) {
 
 // PrintFullEnvironment will print the full environment including $GOPATH, $GOBIN and all variables which has been set by this library.
 func PrintFullEnvironment() {
+	additionalVariables := retrieveAdditionalEnvVariables()
+
+	PrintVariables(additionalVariables)
+	PrintVariables(appliedVariables)
+}
+
+func retrieveAdditionalEnvVariables() []Variable {
 	var additionalVariables []Variable
 	for _, varName := range additionalVariableNames {
 		additionalVariables = append(additionalVariables, Variable{
@@ -59,6 +71,5 @@ func PrintFullEnvironment() {
 		})
 	}
 
-	PrintVariables(additionalVariables)
-	PrintVariables(appliedVariables)
+	return additionalVariables
 }

@@ -8,6 +8,35 @@ import (
 	"github.com/onsi/gomega/types"
 )
 
+func TestAppliedVariables(t *testing.T) {
+	t.Run("should return all applied env variables", func(t *testing.T) {
+		tt := NewGomegaWithT(t)
+
+		firstEnvVariable := Variable{
+			Name:  "FIRST_VAR",
+			Value: "first_value",
+		}
+
+		secondEnvVariable := Variable{
+			Name:  "SECOND_VAR",
+			Value: "second_value",
+		}
+
+		err := ApplyEnvVariable(firstEnvVariable)
+		tt.Expect(err).To(Not(HaveOccurred()))
+		err = ApplyEnvVariable(secondEnvVariable)
+		tt.Expect(err).To(Not(HaveOccurred()))
+
+		expectedAppliedVars := []Variable{
+			firstEnvVariable,
+			secondEnvVariable,
+		}
+
+		actualAppliedVars := AppliedEnvVariables()
+		tt.Expect(actualAppliedVars).To(Equal(expectedAppliedVars))
+	})
+}
+
 func TestSetEnvVariable(t *testing.T) {
 	type testFacts struct {
 		inputVariable             Variable

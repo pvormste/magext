@@ -5,7 +5,7 @@ mageXT contains some extensions for usage in go [magefiles](https://github.com/m
 You can see the extensions in this repository in action:
  - `mage.go`: is the mage 'executable'
  - `mage_targets.go`: contains the actual targets for mage an uses packages like `gocmd`, `cilintcmd`, etc.
- - `mage_env.go`: defines the mage environment and uses the env names from the packages
+ - `mage_env.go`: defines the mage environment by using the `mageenv` package
 
 ## Extensions
 

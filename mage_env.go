@@ -31,7 +31,7 @@ func setEnvironmentVariables() error {
 		},
 	}
 
-	if err := mageenv.SetMultipleEnvVariables(variables); err != nil {
+	if err := mageenv.ApplyMultipleEnvVariables(variables); err != nil {
 		return err
 	}
 

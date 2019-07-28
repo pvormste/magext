@@ -8,7 +8,7 @@ import (
 	"github.com/pvormste/magext/gocmd"
 )
 
-var variables []Variable
+var appliedVariables []Variable
 var additionalVariableNames = []string{
 	gocmd.EnvNameGoPath,
 	gocmd.EnvNameGoBin,
@@ -16,8 +16,8 @@ var additionalVariableNames = []string{
 
 var errEmptyName = errors.New("cannot set an a variable to a value when the name is empty")
 
-// SetEnvVariable sets the provided variable to its value. It will return an error when the name is empty.
-func SetEnvVariable(variable Variable) error {
+// ApplyEnvVariable sets the provided variable to its value. It will return an error when the name is empty.
+func ApplyEnvVariable(variable Variable) error {
 	if len(variable.Name) == 0 {
 		return errEmptyName
 	}
@@ -26,15 +26,15 @@ func SetEnvVariable(variable Variable) error {
 		return err
 	}
 
-	variables = append(variables, variable)
+	appliedVariables = append(appliedVariables, variable)
 	return nil
 }
 
-// SetMultipleEnvVariables receives a slice of environment variables to set all of them to their respective value.
+// ApplyMultipleEnvVariables receives a slice of environment variables to set all of them to their respective value.
 // Will return an error when one of them fails.
-func SetMultipleEnvVariables(multipleVariables []Variable) error {
+func ApplyMultipleEnvVariables(multipleVariables []Variable) error {
 	for _, variable := range multipleVariables {
-		if err := SetEnvVariable(variable); err != nil {
+		if err := ApplyEnvVariable(variable); err != nil {
 			return err
 		}
 	}
@@ -60,5 +60,5 @@ func PrintFullEnvironment() {
 	}
 
 	PrintVariables(additionalVariables)
-	PrintVariables(variables)
+	PrintVariables(appliedVariables)
 }

@@ -27,12 +27,12 @@ func TestSetEnvVariable(t *testing.T) {
 			expectedErr:               HaveOccurred(),
 		}
 
-		actualErr := SetEnvVariable(test.inputVariable)
+		actualErr := ApplyEnvVariable(test.inputVariable)
 		tt.Expect(actualErr).To(test.expectedErr)
-		tt.Expect(len(variables)).To(test.expectedNumberOfVariables)
+		tt.Expect(len(appliedVariables)).To(test.expectedNumberOfVariables)
 
 		// Reset the package variable
-		variables = []Variable{}
+		appliedVariables = []Variable{}
 	})
 
 	t.Run("should successfully set the env variable", func(t *testing.T) {
@@ -47,14 +47,14 @@ func TestSetEnvVariable(t *testing.T) {
 			expectedErr:               Not(HaveOccurred()),
 		}
 
-		actualErr := SetEnvVariable(test.inputVariable)
+		actualErr := ApplyEnvVariable(test.inputVariable)
 		tt.Expect(actualErr).To(test.expectedErr)
-		tt.Expect(len(variables)).To(test.expectedNumberOfVariables)
-		tt.Expect(variables[0]).To(Equal(test.inputVariable))
+		tt.Expect(len(appliedVariables)).To(test.expectedNumberOfVariables)
+		tt.Expect(appliedVariables[0]).To(Equal(test.inputVariable))
 		tt.Expect(os.Getenv(test.inputVariable.Name)).To(Equal(test.inputVariable.Value))
 
 		// Reset the package variable
-		variables = []Variable{}
+		appliedVariables = []Variable{}
 	})
 }
 
@@ -65,7 +65,7 @@ func TestSetMultipleEnvVariables(t *testing.T) {
 		expectedErr               types.GomegaMatcher
 	}
 
-	t.Run("should return error when SetEnvVariable returns error", func(t *testing.T) {
+	t.Run("should return error when ApplyEnvVariable returns error", func(t *testing.T) {
 		tt := NewGomegaWithT(t)
 
 		test := testFacts{
@@ -79,15 +79,15 @@ func TestSetMultipleEnvVariables(t *testing.T) {
 			expectedErr:               HaveOccurred(),
 		}
 
-		actualErr := SetMultipleEnvVariables(test.inputMultipleVariables)
+		actualErr := ApplyMultipleEnvVariables(test.inputMultipleVariables)
 		tt.Expect(actualErr).To(test.expectedErr)
-		tt.Expect(len(variables)).To(test.expectedNumberOfVariables)
+		tt.Expect(len(appliedVariables)).To(test.expectedNumberOfVariables)
 
 		// Reset the package variable
-		variables = []Variable{}
+		appliedVariables = []Variable{}
 	})
 
-	t.Run("should successfully set multiple env variables to thei values", func(t *testing.T) {
+	t.Run("should successfully set multiple env variables to their values", func(t *testing.T) {
 		tt := NewGomegaWithT(t)
 
 		test := testFacts{
@@ -101,13 +101,13 @@ func TestSetMultipleEnvVariables(t *testing.T) {
 			expectedErr:               Not(HaveOccurred()),
 		}
 
-		actualErr := SetMultipleEnvVariables(test.inputMultipleVariables)
+		actualErr := ApplyMultipleEnvVariables(test.inputMultipleVariables)
 		tt.Expect(actualErr).To(test.expectedErr)
-		tt.Expect(len(variables)).To(test.expectedNumberOfVariables)
-		tt.Expect(variables[0]).To(Equal(test.inputMultipleVariables[0]))
+		tt.Expect(len(appliedVariables)).To(test.expectedNumberOfVariables)
+		tt.Expect(appliedVariables[0]).To(Equal(test.inputMultipleVariables[0]))
 		tt.Expect(os.Getenv(test.inputMultipleVariables[0].Name)).To(Equal(test.inputMultipleVariables[0].Value))
 
 		// Reset the package variable
-		variables = []Variable{}
+		appliedVariables = []Variable{}
 	})
 }

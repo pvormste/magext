@@ -6,8 +6,9 @@ import (
 	"github.com/magefile/mage/sh"
 )
 
+const EnvName = "MAGEXT_GOLANGCI_LINT_CMD"
+
 const (
-	CommandEnv = "MAGEFILE_GOLANGCI_LINT_CMD"
 	CommandURL = "github.com/golangci/golangci-lint/cmd/golangci-lint"
 	ModuleURL  = "github.com/golangci/golangci-lint"
 )
@@ -18,7 +19,7 @@ var runCmdWithOut = sh.OutCmd(Command(), "run")
 // Command returns the defined executable for golangci-lint.
 // Defaults to `golangci-lint`.
 func Command() string {
-	if cmd := os.Getenv(CommandEnv); cmd != "" {
+	if cmd := os.Getenv(EnvName); cmd != "" {
 		return cmd
 	}
 

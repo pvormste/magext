@@ -11,5 +11,6 @@ You can see the extensions in this repository in action:
 
 | package | description | godoc |
 | ------- | ----------- | ----- |
+| mageenv | helper package for working with environment variables | [godoc](https://godoc.org/github.com/pvormste/magext/mageenv) |
 | gocmd | go commands like `get`, `install` | [godoc](https://godoc.org/github.com/pvormste/magext/gocmd) |
 | cilintcmd | commands for golangci-lint | [godoc](https://godoc.org/github.com/pvormste/magext/cilintcmd) |

@@ -30,6 +30,9 @@ func TestSetEnvVariable(t *testing.T) {
 		actualErr := SetEnvVariable(test.inputVariable)
 		tt.Expect(actualErr).To(test.expectedErr)
 		tt.Expect(len(variables)).To(test.expectedNumberOfVariables)
+
+		// Reset the package variable
+		variables = []Variable{}
 	})
 
 	t.Run("should successfully set the env variable", func(t *testing.T) {
@@ -49,6 +52,9 @@ func TestSetEnvVariable(t *testing.T) {
 		tt.Expect(len(variables)).To(test.expectedNumberOfVariables)
 		tt.Expect(variables[0]).To(Equal(test.inputVariable))
 		tt.Expect(os.Getenv(test.inputVariable.Name)).To(Equal(test.inputVariable.Value))
+
+		// Reset the package variable
+		variables = []Variable{}
 	})
 }
 
@@ -76,6 +82,9 @@ func TestSetMultipleEnvVariables(t *testing.T) {
 		actualErr := SetMultipleEnvVariables(test.inputMultipleVariables)
 		tt.Expect(actualErr).To(test.expectedErr)
 		tt.Expect(len(variables)).To(test.expectedNumberOfVariables)
+
+		// Reset the package variable
+		variables = []Variable{}
 	})
 
 	t.Run("should successfully set multiple env variables to thei values", func(t *testing.T) {
@@ -97,5 +106,8 @@ func TestSetMultipleEnvVariables(t *testing.T) {
 		tt.Expect(len(variables)).To(test.expectedNumberOfVariables)
 		tt.Expect(variables[0]).To(Equal(test.inputMultipleVariables[0]))
 		tt.Expect(os.Getenv(test.inputMultipleVariables[0].Name)).To(Equal(test.inputMultipleVariables[0].Value))
+
+		// Reset the package variable
+		variables = []Variable{}
 	})
 }

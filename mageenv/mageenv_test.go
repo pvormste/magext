@@ -34,6 +34,9 @@ func TestAppliedVariables(t *testing.T) {
 
 		actualAppliedVars := AppliedEnvVariables()
 		tt.Expect(actualAppliedVars).To(Equal(expectedAppliedVars))
+
+		// Reset the package variable
+		appliedVariables = []Variable{}
 	})
 }
 
